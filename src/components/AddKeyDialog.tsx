@@ -127,27 +127,27 @@ export function AddKeyDialog({ open, onClose, onSave, editingKey }: AddKeyDialog
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center space-x-2">
-            <div className="text-2xl">{selectedProvider?.icon || '🔑'}</div>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto mx-2 sm:mx-auto">
+        <DialogHeader className="px-1 sm:px-0">
+          <DialogTitle className="flex items-center space-x-2 text-lg sm:text-xl">
+            <div className="text-xl sm:text-2xl">{selectedProvider?.icon || '🔑'}</div>
             <span>{editingKey ? 'Edit API Key' : 'Add New API Key'}</span>
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-6">
+        <div className="space-y-4 sm:space-y-6 px-1 sm:px-0">
           {/* Provider Selection */}
           <div className="space-y-2">
-            <Label htmlFor="provider">Provider *</Label>
+            <Label htmlFor="provider" className="text-sm font-medium">Provider *</Label>
             <Select value={formData.provider} onValueChange={(value) => 
               setFormData(prev => ({ ...prev, provider: value, metadata: {} }))
             }>
-              <SelectTrigger>
+              <SelectTrigger className="min-h-[44px]">
                 <SelectValue placeholder="Select an AI provider" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="z-50">
                 {AI_PROVIDERS.map((provider) => (
-                  <SelectItem key={provider.id} value={provider.id}>
+                  <SelectItem key={provider.id} value={provider.id} className="py-3">
                     <div className="flex items-center space-x-2">
                       <span>{provider.icon}</span>
                       <span>{provider.name}</span>
@@ -192,24 +192,25 @@ export function AddKeyDialog({ open, onClose, onSave, editingKey }: AddKeyDialog
           </div>
 
           {/* Basic Info */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="name" className="text-sm font-medium">Name *</Label>
               <Input
                 id="name"
                 value={formData.name}
                 onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
                 placeholder="e.g., Production OpenAI Key"
+                className="min-h-[44px]"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="expirationDate">Expiration Date</Label>
+              <Label htmlFor="expirationDate" className="text-sm font-medium">Expiration Date</Label>
               <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
+                      "w-full justify-start text-left font-normal min-h-[44px]",
                       !formData.expirationDate && "text-muted-foreground"
                     )}
                   >
@@ -221,7 +222,7 @@ export function AddKeyDialog({ open, onClose, onSave, editingKey }: AddKeyDialog
                     )}
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0" align="start">
+                <PopoverContent className="w-auto p-0 z-50" align="start">
                   <Calendar
                     mode="single"
                     selected={formData.expirationDate}
@@ -231,6 +232,7 @@ export function AddKeyDialog({ open, onClose, onSave, editingKey }: AddKeyDialog
                     }}
                     disabled={(date) => date < new Date()}
                     initialFocus
+                    className="p-3 pointer-events-auto"
                   />
                   {formData.expirationDate && (
                     <div className="p-3 border-t">
@@ -241,7 +243,7 @@ export function AddKeyDialog({ open, onClose, onSave, editingKey }: AddKeyDialog
                           setFormData(prev => ({ ...prev, expirationDate: undefined }));
                           setCalendarOpen(false);
                         }}
-                        className="w-full"
+                        className="w-full min-h-[44px]"
                       >
                         Clear Date
                       </Button>
@@ -379,18 +381,26 @@ export function AddKeyDialog({ open, onClose, onSave, editingKey }: AddKeyDialog
           )}
 
           {/* Actions */}
-          <div className="flex justify-between items-center pt-4 border-t">
-            <Button variant="outline" onClick={onClose}>
+          <div className="flex flex-col sm:flex-row sm:justify-between items-stretch sm:items-center gap-3 pt-4 border-t">
+            <Button 
+              variant="outline" 
+              onClick={onClose}
+              className="order-2 sm:order-1 min-h-[44px]"
+            >
               ← Back to Vault
             </Button>
-            <div className="flex space-x-2">
-              <Button variant="outline" onClick={onClose}>
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 order-1 sm:order-2">
+              <Button 
+                variant="outline" 
+                onClick={onClose}
+                className="min-h-[44px]"
+              >
                 Cancel
               </Button>
               <Button 
                 onClick={handleSave} 
                 disabled={!isValid}
-                className="bg-gradient-vault hover:opacity-90"
+                className="bg-gradient-vault hover:opacity-90 min-h-[44px]"
               >
                 <Save className="h-4 w-4 mr-2" />
                 {editingKey ? 'Update Key' : 'Save Key'}

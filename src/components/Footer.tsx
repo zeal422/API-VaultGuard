@@ -2,9 +2,9 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-background/50 backdrop-blur-sm">
-      <div className="container mx-auto px-4 py-6">
-        <div className="text-center space-y-2">
+    <footer className="border-t bg-background/50 backdrop-blur-sm mt-auto">
+      <div className="container mx-auto px-4 py-4 sm:py-6">
+        <div className="text-center space-y-1 sm:space-y-2">
           <p className="text-sm font-medium text-foreground">
             Developed by VectorMedia
           </p>

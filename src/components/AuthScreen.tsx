@@ -63,24 +63,24 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-vault-primary/5 via-background to-vault-accent/5 flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-6">
+      <div className="w-full max-w-md space-y-4 sm:space-y-6">
         {/* Logo */}
         <div className="text-center space-y-2">
-          <div className="mx-auto w-16 h-16 bg-gradient-vault rounded-2xl flex items-center justify-center shadow-vault">
-            <Shield className="w-8 h-8 text-vault-primary-foreground" />
+          <div className="mx-auto w-14 h-14 sm:w-16 sm:h-16 bg-gradient-vault rounded-2xl flex items-center justify-center shadow-vault">
+            <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-vault-primary-foreground" />
           </div>
-          <h1 className="text-3xl font-bold bg-gradient-vault bg-clip-text text-transparent">
+          <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-vault bg-clip-text text-transparent">
             Secure Vault
           </h1>
-          <p className="text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground px-4">
             {mode === 'create' ? 'Create your secure API key vault' : 'Enter your master password'}
           </p>
         </div>
 
         {/* Auth Form */}
-        <Card className="border-0 shadow-surface">
-          <CardHeader className="space-y-1 pb-4">
-            <CardTitle className="text-xl">
+        <Card className="border-0 shadow-surface mx-2 sm:mx-0">
+          <CardHeader className="space-y-1 pb-4 px-4 sm:px-6">
+            <CardTitle className="text-lg sm:text-xl">
               {mode === 'create' ? 'Create Master Password' : 'Unlock Vault'}
             </CardTitle>
             <CardDescription>
@@ -113,11 +113,11 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
             </CardDescription>
           </CardHeader>
           
-          <CardContent>
+          <CardContent className="px-4 sm:px-6">
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Master Password */}
               <div className="space-y-2">
-                <Label htmlFor="password">Master Password</Label>
+                <Label htmlFor="password" className="text-sm font-medium">Master Password</Label>
                 <div className="relative">
                   <Input
                     id="password"
@@ -126,7 +126,7 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your master password"
                     className={cn(
-                      "pr-10",
+                      "pr-12 min-h-[44px]",
                       password.length > 0 && password.length < 8 && "border-destructive focus:ring-destructive"
                     )}
                     required
@@ -135,7 +135,7 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
                     type="button"
                     variant="ghost"
                     size="sm"
-                    className="absolute right-1 top-1 h-8 w-8 p-0"
+                    className="absolute right-1 top-1 h-10 w-10 p-0"
                     onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -161,7 +161,7 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
               {/* Confirm Password (Create mode only) */}
               {mode === 'create' && (
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword">Confirm Password</Label>
+                  <Label htmlFor="confirmPassword" className="text-sm font-medium">Confirm Password</Label>
                   <div className="relative">
                     <Input
                       id="confirmPassword"
@@ -170,7 +170,7 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       placeholder="Confirm your master password"
                       className={cn(
-                        "pr-10",
+                        "pr-12 min-h-[44px]",
                         confirmPassword.length > 0 && password !== confirmPassword && "border-destructive focus:ring-destructive"
                       )}
                       required
@@ -179,7 +179,7 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
                       type="button"
                       variant="ghost"
                       size="sm"
-                      className="absolute right-1 top-1 h-8 w-8 p-0"
+                      className="absolute right-1 top-1 h-10 w-10 p-0"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     >
                       {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
@@ -202,7 +202,7 @@ export function AuthScreen({ mode, onAuth, error, loading, failedAttempts = 0 }:
               <Button 
                 type="submit" 
                 disabled={!isValid || loading}
-                className="w-full bg-gradient-vault hover:opacity-90 transition-opacity"
+                className="w-full bg-gradient-vault hover:opacity-90 transition-opacity min-h-[44px]"
               >
                 <Lock className="w-4 h-4 mr-2" />
                 {loading ? 'Processing...' : mode === 'create' ? 'Create Vault' : 'Unlock Vault'}

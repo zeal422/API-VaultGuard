@@ -21,19 +21,26 @@ export function EmptyState({ hasKeys, searchQuery, onAddKey, onClearSearch }: Em
   if (searchQuery && hasKeys) {
     // No search results
     return (
-      <div className="flex flex-col items-center justify-center py-16 text-center">
-        <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mb-4">
-          <Search className="w-8 h-8 text-muted-foreground" />
+      <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-center px-4">
+        <div className="w-14 h-14 sm:w-16 sm:h-16 bg-muted rounded-full flex items-center justify-center mb-4">
+          <Search className="w-7 h-7 sm:w-8 sm:h-8 text-muted-foreground" />
         </div>
-        <h3 className="text-xl font-semibold mb-2">No keys found</h3>
-        <p className="text-muted-foreground mb-6 max-w-md">
+        <h3 className="text-lg sm:text-xl font-semibold mb-2">No keys found</h3>
+        <p className="text-sm sm:text-base text-muted-foreground mb-6 max-w-md">
           No API keys match your search for "{searchQuery}". Try adjusting your search terms or clear the search to see all keys.
         </p>
-        <div className="flex space-x-3">
-          <Button variant="outline" onClick={onClearSearch}>
+        <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs sm:max-w-none">
+          <Button 
+            variant="outline" 
+            onClick={onClearSearch}
+            className="min-h-[44px] order-2 sm:order-1"
+          >
             Clear Search
           </Button>
-          <Button onClick={onAddKey} className="bg-gradient-vault hover:opacity-90">
+          <Button 
+            onClick={onAddKey} 
+            className="bg-gradient-vault hover:opacity-90 min-h-[44px] order-1 sm:order-2"
+          >
             <Plus className="w-4 h-4 mr-2" />
             Add New Key
           </Button>

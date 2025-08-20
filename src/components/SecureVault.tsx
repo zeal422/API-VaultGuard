@@ -303,7 +303,6 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
           setShowMainMenu(true);
           setShowAddDialog(false);
           setShowSettingsDialog(false);
-          setEditingKey(undefined);
           setDeletingKey(undefined);
           setSearchQuery('');
         }}
@@ -315,58 +314,58 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
         })}
       />
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 py-4 sm:py-6">
         {showMainMenu ? (
-          <div className="py-16">
-            <div className="text-center mb-12">
-              <div className="w-20 h-20 bg-gradient-vault rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-vault">
-                <Shield className="w-10 h-10 text-vault-primary-foreground" />
+          <div className="py-8 sm:py-16">
+            <div className="text-center mb-8 sm:mb-12">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-vault rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6 shadow-vault">
+                <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-vault-primary-foreground" />
               </div>
-              <h2 className="text-3xl font-bold mb-4">Welcome to Your Secure Vault</h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <h2 className="text-2xl sm:text-3xl font-bold mb-4 px-4">Welcome to Your Secure Vault</h2>
+              <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto px-4">
                 Your personal encrypted storage for AI API keys. All data is secured with AES-256 encryption and stored locally on your device.
               </p>
             </div>
 
             {/* Feature Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8 sm:mb-12">
               <Card className="border-0 shadow-surface hover:shadow-vault transition-shadow">
-                <CardHeader className="text-center pb-2">
+                <CardHeader className="text-center pb-2 px-4 pt-4">
                   <div className="w-12 h-12 bg-secure-green/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Shield className="w-6 h-6 text-secure-green" />
                   </div>
-                  <CardTitle className="text-lg">Bank-Grade Security</CardTitle>
+                  <CardTitle className="text-base sm:text-lg">Bank-Grade Security</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center">
-                  <CardDescription>
+                <CardContent className="text-center px-4 pb-4">
+                  <CardDescription className="text-sm">
                     AES-256 encryption with secure master password protection. Your keys never leave your device unencrypted.
                   </CardDescription>
                 </CardContent>
               </Card>
 
               <Card className="border-0 shadow-surface hover:shadow-vault transition-shadow">
-                <CardHeader className="text-center pb-2">
+                <CardHeader className="text-center pb-2 px-4 pt-4">
                   <div className="w-12 h-12 bg-vault-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Zap className="w-6 h-6 text-vault-primary" />
                   </div>
-                  <CardTitle className="text-lg">Lightning Fast</CardTitle>
+                  <CardTitle className="text-base sm:text-lg">Lightning Fast</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center">
-                  <CardDescription>
+                <CardContent className="text-center px-4 pb-4">
+                  <CardDescription className="text-sm">
                     Instant search, quick-copy functionality, and blazing fast access to your API keys when you need them.
                   </CardDescription>
                 </CardContent>
               </Card>
 
-              <Card className="border-0 shadow-surface hover:shadow-vault transition-shadow">
-                <CardHeader className="text-center pb-2">
+              <Card className="border-0 shadow-surface hover:shadow-vault transition-shadow sm:col-span-2 lg:col-span-1">
+                <CardHeader className="text-center pb-2 px-4 pt-4">
                   <div className="w-12 h-12 bg-vault-accent/10 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <FileKey className="w-6 h-6 text-vault-accent" />
                   </div>
-                  <CardTitle className="text-lg">Smart Organization</CardTitle>
+                  <CardTitle className="text-base sm:text-lg">Smart Organization</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center">
-                  <CardDescription>
+                <CardContent className="text-center px-4 pb-4">
+                  <CardDescription className="text-sm">
                     Pre-configured templates for major AI providers, custom tags, expiration tracking, and metadata support.
                   </CardDescription>
                 </CardContent>
@@ -374,19 +373,23 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
             </div>
 
             {/* Quick Actions */}
-            <div className="text-center space-y-4">
-              <h3 className="text-xl font-semibold">Get Started</h3>
-              <p className="text-muted-foreground mb-6">
+            <div className="text-center space-y-4 px-4">
+              <h3 className="text-lg sm:text-xl font-semibold">Get Started</h3>
+              <p className="text-muted-foreground mb-6 text-sm sm:text-base">
                 Add your first API key to begin securing your AI service credentials
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-3 sm:space-y-0 sm:space-x-4">
-                <Button onClick={() => setShowAddDialog(true)} size="lg" className="bg-gradient-vault hover:opacity-90 shadow-vault">
+                <Button 
+                  onClick={() => setShowAddDialog(true)} 
+                  size="lg" 
+                  className="bg-gradient-vault hover:opacity-90 shadow-vault w-full sm:w-auto min-h-[44px]"
+                >
                   <Plus className="w-5 h-5 mr-2" />
                   Add Your First API Key
                 </Button>
                 
-                <div className="text-sm text-muted-foreground">
+                <div className="text-xs sm:text-sm text-muted-foreground">
                   or learn about our{' '}
                   <span className="font-medium text-foreground">supported providers</span>
                 </div>
@@ -394,7 +397,12 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
 
               {vaultData.keys.length > 0 && (
                 <div className="mt-6">
-                  <Button variant="outline" onClick={() => setShowMainMenu(false)} size="lg">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setShowMainMenu(false)} 
+                    size="lg"
+                    className="w-full sm:w-auto min-h-[44px]"
+                  >
                     <FileKey className="w-5 h-5 mr-2" />
                     View All Keys ({vaultData.keys.length})
                   </Button>
@@ -402,9 +410,9 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
               )}
 
               {/* Supported Providers Preview */}
-              <div className="mt-8 p-4 bg-muted/30 rounded-lg max-w-3xl mx-auto">
-                <p className="text-sm font-medium mb-3">Pre-configured templates for:</p>
-                <div className="flex flex-wrap justify-center gap-2">
+              <div className="mt-6 sm:mt-8 p-3 sm:p-4 bg-muted/30 rounded-lg max-w-3xl mx-auto">
+                <p className="text-xs sm:text-sm font-medium mb-3">Pre-configured templates for:</p>
+                <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
                   {[
                     { name: 'OpenAI', icon: '🤖' },
                     { name: 'Anthropic', icon: '🧠' },
@@ -429,11 +437,12 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
         ) : (
           <>
             {/* Back to Main Menu Button */}
-            <div className="mb-6">
+            <div className="mb-4 sm:mb-6">
               <Button 
                 onClick={() => setShowMainMenu(true)} 
                 variant="outline" 
                 size="sm"
+                className="min-h-[44px] px-4"
               >
                 ← Back to Main Menu
               </Button>
@@ -441,8 +450,8 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
 
             {/* Search Results Info */}
             {searchQuery && (
-              <div className="mb-6">
-                <Badge variant="outline" className="text-sm">
+              <div className="mb-4 sm:mb-6">
+                <Badge variant="outline" className="text-sm px-3 py-1">
                   {filteredKeys.length} of {vaultData.keys.length} keys match "{searchQuery}"
                 </Badge>
               </div>
@@ -450,7 +459,7 @@ export function SecureVault({ masterPassword, onLock }: SecureVaultProps) {
 
             {/* Keys Grid */}
             {filteredKeys.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                 {filteredKeys.map((apiKey) => (
                   <KeyCard
                     key={apiKey.id}
